@@ -1,43 +1,46 @@
 package com.example.mathsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.Log;
 import android.widget.Button;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.widget.TextView;
-import java.lang.reflect.Type;
+import android.view.View.*;
+
 import java.util.*;
 
-
 public class Level0 extends AppCompatActivity {
-    public Button Question;
     public TextView QuestionDisplay;
     public Button Answer1;
     public Button Answer2;
     public Button Answer3;
     public Button Answer4;
     public TextView Score;
-    int count = 9;
     int totalScore = 0;
-    Hashtable<Integer, int[]> Questions = new Hashtable<>();
+    Question[] questionArr;
+    int count;
 
-    public void changeButtons(){
+    public void changeButtons(Question q) {
+        QuestionDisplay.setText(String.valueOf(q.number1 + q.operator + q.number2));
+        Answer1.setText(String.valueOf(q.answer1));
+        Answer2.setText(String.valueOf(q.answer2));
+        Answer3.setText(String.valueOf(q.answer3));
+        Answer4.setText(String.valueOf(q.answer4));
         count--;
-        QuestionDisplay.setText(String.valueOf(Questions.get(count)[0]) + " + " + String.valueOf(Questions.get(count)[1]));
-        Answer1.setText(String.valueOf(Questions.get(count)[2]));
-        Answer2.setText(String.valueOf(Questions.get(count)[3]));
-        Answer3.setText(String.valueOf(Questions.get(count)[4]));
-        Answer4.setText(String.valueOf(Questions.get(count)[5]));
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level0);
+
+        // fill the question array with questions.
+        for (int i = 0; i < 9; i++) {
+            questionArr[i] = new Question();
+        }
+        //create a variable to index the array.
+        count = questionArr.length;
+
         // create reference to the objects in the activity
         QuestionDisplay = (TextView) findViewById(R.id.txt_viewer);
         Score = (TextView) findViewById(R.id.Score);
@@ -46,95 +49,63 @@ public class Level0 extends AppCompatActivity {
         Answer3 = (Button) findViewById(R.id.answer3);
         Answer4 = (Button) findViewById(R.id.answer4);
 
-        for (int i = 0; i < 10; i++){
-            // declared two numbers to hold the value of the question numbers
-            Random r = new Random();
-            // create two random numbers between 1 and 12
-            int numberOne = r.nextInt(11) + 1;
-            int numberTwo = r.nextInt(11) + 1;
-            int selector = r.nextInt(4) + 1;
-            // declare 4 numbers for the answers
-            int answerOne = 0, answerTwo = 0, answerThree = 0, answerFour = 0;
+        QuestionDisplay.setText(String.valueOf(questionArr[count].number1 + questionArr[count].operator + questionArr[count].number2));
+        Answer1.setText(String.valueOf(questionArr[count].answer1));
+        Answer2.setText(String.valueOf(questionArr[count].answer2));
+        Answer3.setText(String.valueOf(questionArr[count].answer3));
+        Answer4.setText(String.valueOf(questionArr[count].answer4));
 
-            //switch statement to make the answer be a random button each time
-            switch (selector){
-                case 1:
-                    answerOne = numberOne + numberTwo;
-                    answerTwo = r.nextInt(23) + 1;
-                    answerThree = r.nextInt(23) + 1;
-                    answerFour = r.nextInt(23) + 1;
-                    break;
-                case 2:
-                    answerTwo = numberOne + numberTwo;
-                    answerOne = r.nextInt(23) + 1;
-                    answerThree = r.nextInt(23) + 1;
-                    answerFour = r.nextInt(23) + 1;
-                    break;
-                case 3:
-                    answerThree = numberOne + numberTwo;
-                    answerTwo = r.nextInt(23) + 1;
-                    answerOne = r.nextInt(23) + 1;
-                    answerFour = r.nextInt(23) + 1;
-                    break;
-                case 4:
-                    answerFour = numberOne + numberTwo;
-                    answerTwo = r.nextInt(23) + 1;
-                    answerOne = r.nextInt(23) + 1;
-                    answerThree = r.nextInt(23) + 1;
-                    break;
 
-            }
-            int[] arr = {numberOne, numberTwo, answerOne, answerTwo, answerThree, answerFour};
-            Questions.put(i, arr);
-            // need to convert to string to display ints to the screen and not crash the app.
-            QuestionDisplay.setText(String.valueOf(numberOne) + " + " + String.valueOf(numberTwo));
-            Answer1.setText(String.valueOf(answerOne));
-            Answer2.setText(String.valueOf(answerTwo));
-            Answer3.setText(String.valueOf(answerThree));
-            Answer4.setText(String.valueOf(answerFour));
-        }
-        Answer1.setOnClickListener(new OnClickListener(){
+        Answer1.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick (View view){
-                if(Answer1.getText() == String.valueOf(Questions.get(count)[0] + Questions.get(count)[1])){
-                    totalScore += 10;
+            public void onClick(View view) {
+                if (Answer1.getText() == String.valueOf(questionArr[count].answer)) {
+                    totalScore += 1;
                     Score.setText(String.valueOf(totalScore));
-                    changeButtons();
+                    changeButtons(questionArr[count]);
+
+                } else {
+                    changeButtons(questionArr[count]);
                 }
             }
         });
-        Answer2.setOnClickListener(new OnClickListener(){
+        Answer2.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick (View view){
-                if(Answer2.getText() == String.valueOf(Questions.get(count)[0] + Questions.get(count)[1])){
-                    totalScore += 10;
+            public void onClick(View view) {
+                if (Answer2.getText() == String.valueOf(questionArr[count].answer)) {
+                    totalScore += 1;
                     Score.setText(String.valueOf(totalScore));
-                    changeButtons();
-
+                    changeButtons(questionArr[count]);
+                } else {
+                    changeButtons(questionArr[count]);
                 }
             }
         });
-        Answer3.setOnClickListener(new OnClickListener(){
+        Answer3.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick (View view){
-                if(Answer3.getText() == String.valueOf(Questions.get(count)[0] + Questions.get(count)[1])){
-                    totalScore += 10;
+            public void onClick(View view) {
+                if (Answer3.getText() == String.valueOf(questionArr[count].answer)) {
+                    totalScore += 1;
                     Score.setText(String.valueOf(totalScore));
-                    changeButtons();
+                    changeButtons(questionArr[count]);
+                } else {
+                    changeButtons(questionArr[count]);
                 }
             }
         });
-        Answer4.setOnClickListener(new OnClickListener(){
+        Answer4.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick (View view){
-                if(Answer4.getText() == String.valueOf(Questions.get(count)[0] + Questions.get(count)[1])){
-                    totalScore += 10;
+            public void onClick(View view) {
+                if (Answer4.getText() == String.valueOf(questionArr[count].answer)) {
+                    totalScore += 1;
                     Score.setText(String.valueOf(totalScore));
-                    changeButtons();
+                    changeButtons(questionArr[count]);
+                } else {
+                    changeButtons(questionArr[count]);
                 }
-
             }
         });
-
     }
 }
+
+
