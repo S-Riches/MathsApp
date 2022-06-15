@@ -26,12 +26,13 @@ public class Question {
     // random declaration
     Random r = new Random();
 
+    //constructor
     public Question (){
         // on creation randomise these numbers
-        number1 = r.nextInt(11) + 1;
-        number2 = r.nextInt(11) + 1;
-        selector = r.nextInt(4) + 1;
-        operatorSelector = r.nextInt(4) + 1;
+        this.number1 = r.nextInt(11) + 1;
+        this.number2 = r.nextInt(11) + 1;
+        this.selector = r.nextInt(4) + 1;
+        this.operatorSelector = r.nextInt(4) + 1;
 
         // choose an operator
         switch (operatorSelector){
@@ -53,39 +54,59 @@ public class Question {
             answer = number1 * number2;
         }
         else if (operator == "-") {
+            number1 = r.nextInt(11)+1;
+            number2 = r.nextInt(number1) + 1;
             answer = number1 - number2;
+            // ensure that number two is smaller then number one
+            if (answer < 0){
+                // use the number 2 as the highest number it can be
+                number2 = r.nextInt(number2);
+                answer = number1 - number2;
+            }
         }
         else if (operator == "+") {
             answer = number1 + number2;
         }
         else if (operator == "÷") {
+            number1 = r.nextInt(11)+1;
+            number2 = r.nextInt(number1) + 1;
+            while(number1 % 2 != 0){
+                number1 = r.nextInt(11) + 1;
+            }
+            while(number2 % 2 != 0){
+                number2 = r.nextInt(number1) + 1;
+                // check to make sure the number is able to divide cleanly into number 1
+                if(number1 % number2 != 0){
+                    number2 = r.nextInt(number1) + 1;
+                }
+            }
             answer = number1 / number2;
         }
         // choose which answer variable has the answer
         switch (selector){
             case 1:
-                answer1 = answer;
-                answer2 = r.nextInt(23) + 1;
-                answer3 = r.nextInt(23) + 1;
-                answer4 = r.nextInt(23) + 1;
+                this.answer1 = answer;
+                this.answer2 = r.nextInt(23) + 1;
+                this.answer3 = r.nextInt(23) + 1;
+                this.answer4 = r.nextInt(23) + 1;
                 break;
             case 2:
-                answer2 = answer;
-                answer1 = r.nextInt(23) + 1;
-                answer3 = r.nextInt(23) + 1;
-                answer4 = r.nextInt(23) + 1;
+                this.answer2 = answer;
+                this.answer1 = r.nextInt(23) + 1;
+                this.answer3 = r.nextInt(23) + 1;
+                this.answer4 = r.nextInt(23) + 1;
                 break;
             case 3:
-                answer3 = answer;
-                answer2 = r.nextInt(23) + 1;
-                answer1 = r.nextInt(23) + 1;
-                answer4 = r.nextInt(23) + 1;
+                this.answer3 = answer;
+                this.answer2 = r.nextInt(23) + 1;
+                this.answer1 = r.nextInt(23) + 1;
+                this.answer4 = r.nextInt(23) + 1;
                 break;
             case 4:
-                answer4 = answer;
-                answer2 = r.nextInt(23) + 1;
-                answer1 = r.nextInt(23) + 1;
-                answer3 = r.nextInt(23) + 1;
+                this.answer4 = answer;
+                this.answer2 = r.nextInt(23) + 1;
+                this.answer1 = r.nextInt(23) + 1;
+                this.answer3 = r.nextInt(23) + 1;
                 break;
         }
     }

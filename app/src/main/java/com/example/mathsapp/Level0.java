@@ -17,16 +17,16 @@ public class Level0 extends AppCompatActivity {
     public Button Answer4;
     public TextView Score;
     int totalScore = 0;
-    Question[] questionArr;
-    int count;
+    public Question[] questionArr = new Question[10];
+    public int count;
 
     public void changeButtons(Question q) {
+        count--;
         QuestionDisplay.setText(String.valueOf(q.number1 + q.operator + q.number2));
         Answer1.setText(String.valueOf(q.answer1));
         Answer2.setText(String.valueOf(q.answer2));
         Answer3.setText(String.valueOf(q.answer3));
         Answer4.setText(String.valueOf(q.answer4));
-        count--;
     }
 
     @Override
@@ -35,11 +35,11 @@ public class Level0 extends AppCompatActivity {
         setContentView(R.layout.activity_level0);
 
         // fill the question array with questions.
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             questionArr[i] = new Question();
         }
         //create a variable to index the array.
-        count = questionArr.length;
+        count = questionArr.length - 1;
 
         // create reference to the objects in the activity
         QuestionDisplay = (TextView) findViewById(R.id.txt_viewer);
