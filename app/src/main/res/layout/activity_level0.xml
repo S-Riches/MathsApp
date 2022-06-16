@@ -4,76 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3E780"
+    android:foregroundTint="#DCCF5B"
     tools:context=".Level0">
 
     <Button
         android:id="@+id/answer1"
         android:layout_width="145dp"
         android:layout_height="81dp"
+        android:backgroundTint="#FFB84E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.255"
+        app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.684" />
+        app:layout_constraintVertical_bias="0.684"
+        app:strokeColor="#1C1C1C"
+        app:strokeWidth="1sp" />
 
     <Button
         android:id="@+id/answer3"
         android:layout_width="145dp"
         android:layout_height="81dp"
+        android:backgroundTint="#FFB84E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.255"
+        app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
-
-    <Button
-        android:id="@+id/answer2"
-        android:layout_width="145dp"
-        android:layout_height="81dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.684" />
+        app:layout_constraintVertical_bias="0.846"
+        app:strokeColor="#1C1C1C"
+        app:strokeWidth="1sp" />
 
     <Button
         android:id="@+id/answer4"
         android:layout_width="145dp"
         android:layout_height="81dp"
+        android:backgroundTint="#FFB84E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.868"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
+        app:layout_constraintVertical_bias="0.846"
+        app:strokeColor="#1C1C1C"
+        app:strokeWidth="1sp" />
+
+    <Button
+        android:id="@+id/answer2"
+        android:layout_width="145dp"
+        android:layout_height="81dp"
+        android:backgroundTint="#FFB84E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.684"
+        app:strokeColor="#1C1C1C"
+        app:strokeWidth="1sp" />
 
     <TextView
         android:id="@+id/txt_viewer"
-        android:layout_width="228dp"
-        android:layout_height="63dp"
+        android:layout_width="283dp"
+        android:layout_height="85dp"
         android:layout_marginStart="176dp"
         android:layout_marginEnd="178dp"
+        android:background="#FFFFFF"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintVertical_bias="0.219" />
 
     <TextView
         android:id="@+id/Score"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:text="Score : "
+        android:layout_width="272dp"
+        android:layout_height="32dp"
+        android:text="You have Scored x Out of 10"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="126dp"
+        android:layout_height="48dp"
+        android:background="#1C1C1C"
+        android:lineSpacingExtra="8sp"
+        android:text="Level 1"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.351" />
 </androidx.constraintlayout.widget.ConstraintLayout>
