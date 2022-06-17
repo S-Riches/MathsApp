@@ -3,15 +3,14 @@ package com.example.mathsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
-import android.widget.Button;
-import android.view.View;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.view.View.*;
+import android.os.CountDownTimer;
 
-
-public class Level0 extends AppCompatActivity {
-    // declarations
+public class Level2 extends AppCompatActivity {
     public TextView QuestionDisplay;
     public Button Answer1;
     public Button Answer2;
@@ -21,12 +20,45 @@ public class Level0 extends AppCompatActivity {
     public int totalScore;
     public Question[] questionArr = new Question[10];
     public int count;
+    public ProgressBar timerBar;
+    public CountDownTimer countTime;
+    public int timerLength;
+    int i = 0;
 
-    // change button method
+    public void timer(int timerLength){
+        // iterator
+        i = 0;
+        // check if there is already a timer active otherwise these will overlap
+        if(countTime != null){
+            // cancel the existing timer
+            countTime.cancel();
+        }
+        countTime = new CountDownTimer((long)timerLength * 1000, 1000){
+            @Override
+            public void onTick(long millisUntilFinished){
+                // increment i
+                i++;
+                // increase the progress of the progress bar
+                timerBar.setProgress((int)i*100/timerLength);
+                // if full switch question
+                if(timerBar.getProgress() == 100){
+                    countTime.cancel();
+                    changeButtons(questionArr[count], totalScore);
+                }
+            }
+            // change question on finish
+            public void onFinish(){
+                // blank statement
+            }
+            // start the timer
+        }.start();
+
+    }
     public void changeButtons(Question q, int totalScore) {
-        // decrement the count of the questions to go to the next question
+        // run the timer function
+        timer(20);
+        // decrement the list
         count--;
-        // change the text and values of the buttons, score and questions
         QuestionDisplay.setText(String.valueOf(q.number1 + q.operator + q.number2));
         Answer1.setText(String.valueOf(q.answer1));
         Answer2.setText(String.valueOf(q.answer2));
@@ -38,7 +70,7 @@ public class Level0 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level0);
+        setContentView(R.layout.activity_level2);
         // create a media player
         MediaPlayer mp = MediaPlayer.create(this, R.raw.ding);
         MediaPlayer mpLost = MediaPlayer.create(this, R.raw.fail);
@@ -57,32 +89,25 @@ public class Level0 extends AppCompatActivity {
         Answer2 = (Button) findViewById(R.id.answer2);
         Answer3 = (Button) findViewById(R.id.answer3);
         Answer4 = (Button) findViewById(R.id.answer4);
+        timerBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //initially populate the buttons
         changeButtons(questionArr[count], totalScore);
 
-        // create 4 onclick listeners
-        Answer1.setOnClickListener(new OnClickListener() {
+        Answer1.setOnClickListener(new View.OnClickListener() {
             @Override
-            // when clicked
             public void onClick(View view) {
-                // if the text in the button matches that of the questions answer
                 if (Answer1.getText() == String.valueOf(questionArr[count + 1].answer)) {
-                    // play a good sound
                     mp.start();
-                    // add one to the score
                     totalScore += 1;
-                    // change the buttons to the next question
                     changeButtons(questionArr[count], totalScore);
                 } else {
-                    // play the lost sound
                     mpLost.start();
-                    // change the buttons to the next question
                     changeButtons(questionArr[count], totalScore);
                 }
             }
         });
-        Answer2.setOnClickListener(new OnClickListener() {
+        Answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Answer2.getText() == String.valueOf(questionArr[count + 1].answer)) {
@@ -97,7 +122,7 @@ public class Level0 extends AppCompatActivity {
                 }
             }
         });
-        Answer3.setOnClickListener(new OnClickListener() {
+        Answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Answer3.getText() == String.valueOf(questionArr[count + 1].answer)) {
@@ -110,7 +135,7 @@ public class Level0 extends AppCompatActivity {
                 }
             }
         });
-        Answer4.setOnClickListener(new OnClickListener() {
+        Answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Answer4.getText() == String.valueOf(questionArr[count + 1].answer)) {
@@ -125,5 +150,3 @@ public class Level0 extends AppCompatActivity {
         });
     }
 }
-
-
